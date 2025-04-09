@@ -6,18 +6,12 @@
     <Transmission v-show='transmissionShow'/>
     <div class='copyright'>
       <span>
-        <span>版权所有 © 2024 同济大学 - 智慧幕墙数据集管理平台 (</span>
-        <a href='https://github.com/MinmusLin/ICW_OssManagement_Frontend'
+        <span>Intelligent Curtain Wall © 2025 by Tongji University is licensed under</span>
+        <a href='https://creativecommons.org/licenses/by-nc/4.0'
            target='_blank'
            style='color: #409EFF; text-decoration: none'>
-          前端仓库
+          Creative Commons Attribution-NonCommercial 4.0 International
         </a>
-        <a href='https://github.com/MinmusLin/ICW_OssManagement_Backend'
-           target='_blank'
-           style='color: #409EFF; text-decoration: none'>
-          后端仓库
-        </a>
-        <span>)</span>
       </span>
     </div>
     <div class='transmission-control'
