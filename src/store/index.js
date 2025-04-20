@@ -179,7 +179,7 @@ export default new Vuex.Store({
                         objects.push(...res.objects)
                     }
                     if (prefixes) {
-                        prefixes.push(...res.prefixes)
+                        prefixes.push(...(res.prefixes ?? []))
                     }
                 }
                 return {objects, prefixes}
