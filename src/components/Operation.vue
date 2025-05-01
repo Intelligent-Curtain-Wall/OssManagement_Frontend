@@ -40,7 +40,7 @@
           <span>剪切</span>
         </div>
         <div class='btn-child'
-             @click="operationClick('delete')"
+             @click="operationClick('delete', copys.length > 0)"
              style='border-right: 1px solid rgba(136, 136, 136, 0.3)'>
           <i class='iconfont icon-dashujukeshihuaico-'/>
           <span>删除</span>
@@ -93,7 +93,7 @@
         <span>{{ deleteNum }} / {{ deleteTotal }}</span>
       </div>
       <div class='delete-list' v-if='!deleteConfirm'>
-        <span>将删除以下文件：</span>
+        <span>将删除以下文件或文件夹：</span>
         <div class='delete-child' v-for='(item, index) in selections' :key='index'>
           <svg class='icon' aria-hidden='true'>
             <!--suppress HtmlUnknownAttribute-->
@@ -225,8 +225,19 @@ export default {
      * Opens a dialog for performing file operations such as delete.
      * @method operationClick
      * @param {string} type - The type of operation (delete).
+     * @param {boolean} disabled - Flag indicating whether the operation should be disabled (true) or enabled (false).
      */
-    operationClick(type) {
+    operationClick(type, disabled) {
+      if (disabled) {
+        this.$notify({
+          title: '删除操作取消',
+          message: '请完成或取消粘贴操作后再进行删除操作',
+          type: 'warning',
+          position: 'top-left',
+          duration: 3000
+        })
+        return
+      }
       if (this.selections.length < 1) {
         return
       }
@@ -355,7 +366,7 @@ export default {
       }
       let icon = '#icon-wendang1'
       let names = row.name.split('.')
-      let suffix = names[names.length - 1]
+      let suffix = names[names.length - 1].toLowerCase()
       suffix === 'zip' && (icon = '#icon-yasuobao')
       suffix === 'pdf' && (icon = '#icon-pdf')
       suffix === 'docx' && (icon = '#icon-WORD')

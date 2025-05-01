@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import OSS from 'ali-oss'
 import {uuid} from '@/tool'
 import router from '@/router'
+import {Notification} from 'element-ui'
 
 Vue.use(Vuex)
 
@@ -306,6 +307,16 @@ export default new Vuex.Store({
          * @returns {Promise<void>}
          */
         async pasteClick({state, commit, dispatch}, info = {}) {
+            if (state.copyPath === state.path) {
+                Notification({
+                    title: '粘贴操作取消',
+                    message: '源文件路径与目标路径一致',
+                    type: 'warning',
+                    position: 'top-left',
+                    duration: 3000
+                })
+                return
+            }
             const {copy} = require('@/api/index')
             commit('stateUpdate', {name: 'copyNum', data: 0})
             commit('stateUpdate', {name: 'copyVisible', data: true})

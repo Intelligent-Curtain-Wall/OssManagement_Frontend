@@ -148,7 +148,8 @@ export default {
         {name: 'spalling-detection', subsystem: '玻璃幕墙爆裂检测系统'},
         {name: 'stain-detection', subsystem: '石材幕墙污渍检测系统'},
         {name: 'vibration-detection', subsystem: '幕墙震动数据检测与展示系统'},
-        {name: 'oss-management', subsystem: '智慧幕墙数据集管理平台管理员'}
+        {name: 'oss-management', subsystem: '智慧幕墙数据集管理平台管理员'},
+        {name: 'common', subsystem: '智慧幕墙数据集通用文件'}
       ]
     }
   },
@@ -408,7 +409,7 @@ export default {
         if (name.endsWith('/')) {
           name = name.slice(0, -1)
         }
-        if (name === ossUserName) {
+        if (name === ossUserName || name === 'common') {
           await this.fileNameClick(row)
         } else {
           this.$notify({
@@ -431,7 +432,7 @@ export default {
      */
     imgSuffixTool(name) {
       const suffix = name.split('.').pop()
-      return ['png', 'jpeg', 'jpg', 'gif', 'webp'].includes(suffix)
+      return ['png', 'jpeg', 'jpg', 'gif', 'webp', 'PNG', 'JPEG', 'JPG', 'GIF', 'WEBP'].includes(suffix)
     },
 
     /**
@@ -455,8 +456,7 @@ export default {
       }
       let icon = '#icon-wendang1'
       let names = row.name.split('.')
-      let suffix = names[names.length - 1]
-      suffix === 'zip' && (icon = '#icon-yasuobao')
+      let suffix = names[names.length - 1].toLowerCase()
       suffix === 'pdf' && (icon = '#icon-pdf')
       suffix === 'docx' && (icon = '#icon-WORD')
       suffix === 'doc' && (icon = '#icon-WORD')
