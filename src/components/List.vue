@@ -42,12 +42,22 @@
                style='font-size: 15px; font-weight: 700; color: #409EFF; cursor: pointer'>
             下载
           </div>
-          <div @click='renameClick(scope.row)'
-               style='font-size: 15px; font-weight: 700; color: #888888; cursor: pointer'>
+          <div @click="!(ossUserName != 'oss-management' && path.slice(0, 7) == 'common/') && renameClick(scope.row)"
+               :style="{
+                 'font-size': '15px',
+                 'font-weight': '700',
+                 'color': '#888888',
+                 'cursor': !(ossUserName != 'oss-management' && path.slice(0, 7) == 'common/') ? 'pointer' : 'not-allowed'
+               }">
             重命名
           </div>
-          <div @click='deleteKeyTool(scope.row)'
-               style='font-size: 15px; font-weight: 700; color: #F56C6C; cursor: pointer'>
+          <div @click="!(ossUserName != 'oss-management' && path.slice(0, 7) == 'common/') && deleteKeyTool(scope.row)"
+               :style="{
+                 'font-size': '15px',
+                 'font-weight': '700',
+                 'color': '#F56C6C',
+                 'cursor': !(ossUserName != 'oss-management' && path.slice(0, 7) == 'common/') ? 'pointer' : 'not-allowed'
+               }">
             删除
           </div>
         </div>
@@ -150,7 +160,8 @@ export default {
         {name: 'vibration-detection', subsystem: '幕墙震动数据检测与展示系统'},
         {name: 'oss-management', subsystem: '智慧幕墙数据集管理平台管理员'},
         {name: 'common', subsystem: '智慧幕墙数据集通用文件'}
-      ]
+      ],
+      ossUserName: window.localStorage.getItem('ossUserName') || ''
     }
   },
   computed: mapState({

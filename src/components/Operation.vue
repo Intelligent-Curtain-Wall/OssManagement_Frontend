@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class='bottom'>
-      <div class='ace-btns' v-show='path' style='transform: translateY(-3px)'>
+      <div class='ace-btns' v-show="!(!path || (ossUserName != 'oss-management' && path.slice(0, 7) == 'common/'))" style='transform: translateY(-3px)'>
         <div class='btn-child'>
           <i class='iconfont icon-shangchuan'/>
           <span>文件</span>
@@ -53,8 +53,8 @@
           <span class='iconfont icon-dashujukeshihuaico-' @click='cancelPasteClick'/>
         </div>
       </div>
-      <div v-show='!path' style='font-size: 14px; padding-top: 2px; padding-left: 3px'>
-        <span style='user-select: none'>欢迎使用智慧幕墙数据集管理平台！</span>
+      <div v-show="!path || (ossUserName != 'oss-management' && path.slice(0, 7) == 'common/')" style='font-size: 14px; padding-top: 2px; padding-left: 3px'>
+        <span style='user-select: none'>欢迎使用智慧幕墙数据集管理平台！{{ path.slice(0, 7) == 'common/' ? '您正在访问智慧幕墙数据集通用文件。' : '' }}</span>
       </div>
     </div>
 
@@ -154,7 +154,8 @@ export default {
     return {
       percentage,
       mkdirVisible: false,
-      mkdirName: ''
+      mkdirName: '',
+      ossUserName: window.localStorage.getItem('ossUserName') || ''
     }
   },
   computed: mapState({
